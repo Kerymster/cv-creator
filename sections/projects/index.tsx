@@ -26,7 +26,7 @@ const Projects = ({ currentTheme, cvData }: ProjectsProps) => {
             {project.link && (
               <a
                 href={`https://${project.link}`}
-                className={`text-sm ${currentTheme.accent} ${currentTheme.bodyFont} hover:underline`}
+                className={`text-sm ${currentTheme.accent} ${currentTheme.bodyFont} hover:underline cursor-pointer`}
               >
                 View Project
               </a>

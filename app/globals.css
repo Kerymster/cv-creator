@@ -68,4 +68,22 @@ body {
   [class*="col-span-1"] {
     display: none !important;
   }
+  
+  /* Ensure header flex layout works in PDF */
+  #cv-content .flex {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+  }
+  
+  /* Force image to stay in place */
+  #cv-content .flex-shrink-0 {
+    flex-shrink: 0 !important;
+    width: auto !important;
+  }
+  
+  /* Ensure content takes remaining space */
+  #cv-content .flex-1 {
+    flex: 1 !important;
+  }
 }

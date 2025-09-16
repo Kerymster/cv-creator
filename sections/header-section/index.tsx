@@ -1,6 +1,8 @@
 import { ThemeColors } from "@/types/appTypes";
 import { CVData } from "@/types/cvTypes/interfaces";
 import React from "react";
+import ImageSection from "./image-section";
+import ContentSection from "./content-section";
 
 interface HeaderSectionProps {
   currentTheme: ThemeColors;
@@ -9,51 +11,15 @@ interface HeaderSectionProps {
 
 const HeaderSection = ({ currentTheme, cvData }: HeaderSectionProps) => {
   return (
-    <div className="text-center mb-8">
-      <h1
-        className={`text-4xl ${currentTheme.headingFont} font-bold ${currentTheme.text} mb-2`}
-      >
-        {cvData.personalInfo.name}
-      </h1>
-      <p
-        className={`text-xl ${currentTheme.headingFont} font-medium ${currentTheme.accent} mb-4`}
-      >
-        {cvData.personalInfo.title}
-      </p>
-      <div
-        className={`flex flex-wrap justify-center gap-4 text-sm ${currentTheme.bodyFont}`}
-      >
-        <span className={`${currentTheme.text}`}>
-          📧 {cvData.personalInfo.email}
-        </span>
-        <span className={`${currentTheme.text}`}>
-          📱 {cvData.personalInfo.phone}
-        </span>
-        <span className={`${currentTheme.text}`}>
-          📍 {cvData.personalInfo.location}
-        </span>
-      </div>
-      <div
-        className={`flex justify-center gap-4 mt-2 ${currentTheme.bodyFont}`}
-      >
-        <a
-          href={`https://${cvData.personalInfo.linkedin}`}
-          className={`${currentTheme.accent} hover:underline font-medium`}
-        >
-          LinkedIn
-        </a>
-        <a
-          href={`https://${cvData.personalInfo.github}`}
-          className={`${currentTheme.accent} hover:underline font-medium`}
-        >
-          GitHub
-        </a>
-        <a
-          href={`https://${cvData.personalInfo.website}`}
-          className={`${currentTheme.accent} hover:underline font-medium`}
-        >
-          Website
-        </a>
+    <div
+      className={`${currentTheme.headerBg} py-6 px-6 mb-8 rounded-lg border ${currentTheme.border}`}
+    >
+      <div className="flex items-start gap-6">
+        {/* Content Section */}
+        <ContentSection currentTheme={currentTheme} cvData={cvData} />
+
+        {/* Photo Section */}
+        <ImageSection cvData={cvData} />
       </div>
     </div>
   );

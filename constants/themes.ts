@@ -7,6 +7,7 @@ export const themes = {
     card: "bg-gray-50",
     headingFont: "font-poppins",
     bodyFont: "font-inter",
+    headerBg: "bg-gray-100",
   },
   dark: {
     bg: "bg-gray-900",
@@ -16,6 +17,7 @@ export const themes = {
     card: "bg-gray-800",
     headingFont: "font-poppins",
     bodyFont: "font-inter",
+    headerBg: "bg-gray-800",
   },
   blue: {
     bg: "bg-blue-50",
@@ -25,6 +27,7 @@ export const themes = {
     card: "bg-white",
     headingFont: "font-poppins",
     bodyFont: "font-inter",
+    headerBg: "bg-blue-100",
   },
   slateAmber: {
     bg: "bg-slate-50",
@@ -34,6 +37,7 @@ export const themes = {
     card: "bg-white",
     headingFont: "font-poppins",
     bodyFont: "font-inter",
+    headerBg: "bg-slate-100",
   },
   slateAmberDark: {
     bg: "bg-slate-900",
@@ -43,6 +47,7 @@ export const themes = {
     card: "bg-slate-800",
     headingFont: "font-poppins",
     bodyFont: "font-inter",
+    headerBg: "bg-slate-800",
   },
   emerald: {
     bg: "bg-emerald-50",
@@ -52,6 +57,7 @@ export const themes = {
     card: "bg-white",
     headingFont: "font-poppins",
     bodyFont: "font-inter",
+    headerBg: "bg-emerald-100",
   },
   violet: {
     bg: "bg-violet-50",
@@ -61,6 +67,7 @@ export const themes = {
     card: "bg-white",
     headingFont: "font-poppins",
     bodyFont: "font-inter",
+    headerBg: "bg-violet-100",
   },
   rose: {
     bg: "bg-rose-50",
@@ -70,5 +77,6 @@ export const themes = {
     card: "bg-white",
     headingFont: "font-poppins",
     bodyFont: "font-inter",
+    headerBg: "bg-rose-100",
   },
 };

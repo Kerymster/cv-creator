@@ -22,7 +22,7 @@ const Header = ({ currentTheme, setTheme, theme }: HeaderProps) => {
           <div className={`flex gap-2 flex-wrap ${currentTheme.bodyFont}`}>
             <button
               onClick={() => setTheme("light")}
-              className={`px-3 py-1 rounded text-sm ${
+              className={`px-3 py-1 rounded text-sm cursor-pointer ${
                 theme === "light"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-600 hover:bg-gray-100"
@@ -32,7 +32,7 @@ const Header = ({ currentTheme, setTheme, theme }: HeaderProps) => {
             </button>
             <button
               onClick={() => setTheme("dark")}
-              className={`px-3 py-1 rounded text-sm ${
+              className={`px-3 py-1 rounded text-sm cursor-pointer ${
                 theme === "dark"
                   ? "bg-gray-700 text-white"
                   : "text-gray-600 hover:bg-gray-100"
@@ -42,7 +42,7 @@ const Header = ({ currentTheme, setTheme, theme }: HeaderProps) => {
             </button>
             <button
               onClick={() => setTheme("blue")}
-              className={`px-3 py-1 rounded text-sm ${
+              className={`px-3 py-1 rounded text-sm cursor-pointer ${
                 theme === "blue"
                   ? "bg-blue-200 text-blue-900"
                   : "text-gray-600 hover:bg-gray-100"
@@ -52,7 +52,7 @@ const Header = ({ currentTheme, setTheme, theme }: HeaderProps) => {
             </button>
             <button
               onClick={() => setTheme("slateAmber")}
-              className={`px-3 py-1 rounded text-sm ${
+              className={`px-3 py-1 rounded text-sm cursor-pointer ${
                 theme === "slateAmber"
                   ? "bg-amber-200 text-amber-900"
                   : "text-gray-600 hover:bg-gray-100"
@@ -62,7 +62,7 @@ const Header = ({ currentTheme, setTheme, theme }: HeaderProps) => {
             </button>
             <button
               onClick={() => setTheme("slateAmberDark")}
-              className={`px-3 py-1 rounded text-sm ${
+              className={`px-3 py-1 rounded text-sm cursor-pointer ${
                 theme === "slateAmberDark"
                   ? "bg-amber-600 text-amber-100"
                   : "text-gray-600 hover:bg-gray-100"
@@ -72,7 +72,7 @@ const Header = ({ currentTheme, setTheme, theme }: HeaderProps) => {
             </button>
             <button
               onClick={() => setTheme("emerald")}
-              className={`px-3 py-1 rounded text-sm ${
+              className={`px-3 py-1 rounded text-sm cursor-pointer ${
                 theme === "emerald"
                   ? "bg-emerald-200 text-emerald-900"
                   : "text-gray-600 hover:bg-gray-100"
@@ -82,7 +82,7 @@ const Header = ({ currentTheme, setTheme, theme }: HeaderProps) => {
             </button>
             <button
               onClick={() => setTheme("violet")}
-              className={`px-3 py-1 rounded text-sm ${
+              className={`px-3 py-1 rounded text-sm cursor-pointer ${
                 theme === "violet"
                   ? "bg-violet-200 text-violet-900"
                   : "text-gray-600 hover:bg-gray-100"
@@ -92,7 +92,7 @@ const Header = ({ currentTheme, setTheme, theme }: HeaderProps) => {
             </button>
             <button
               onClick={() => setTheme("rose")}
-              className={`px-3 py-1 rounded text-sm ${
+              className={`px-3 py-1 rounded text-sm cursor-pointer ${
                 theme === "rose"
                   ? "bg-rose-200 text-rose-900"
                   : "text-gray-600 hover:bg-gray-100"

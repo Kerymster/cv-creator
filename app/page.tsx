@@ -31,14 +31,16 @@ export default function Home() {
     bodyFont: `font-${bodyFont}`,
   };
 
+  const updateCVData = (updatedData: CVData) => {
+    setCvData(updatedData);
+  };
+
   if (!cvData) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div
-      className={`min-h-screen ${currentTheme.bg} transition-colors duration-300`}
-    >
+    <div className="min-h-screen bg-slate-50 transition-colors duration-300">
       {/* Header */}
       <Header currentTheme={currentTheme} setTheme={setTheme} theme={theme} />
 
@@ -84,6 +86,8 @@ export default function Home() {
               bodyFont={bodyFont}
               setHeadingFont={setHeadingFont}
               setBodyFont={setBodyFont}
+              cvData={cvData}
+              updateCVData={updateCVData}
             />
           </div>
         </div>
