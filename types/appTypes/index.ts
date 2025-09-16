@@ -6,6 +6,7 @@ export interface ThemeColors {
   card: string;
   headingFont: string;
   bodyFont: string;
+  headerBg: string; // Background color for header section
 }
 
 export type Theme =

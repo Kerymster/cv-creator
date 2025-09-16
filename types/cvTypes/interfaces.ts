@@ -17,6 +17,7 @@ export interface personalInfo {
   linkedin: string;
   github: string;
   website: string;
+  photo?: string; // Base64 encoded image or URL
 }
 
 export interface skills {

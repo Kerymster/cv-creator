@@ -10,6 +10,7 @@ export const defaultCVData: CVData = {
     linkedin: "linkedin.com/in/johndoe",
     github: "github.com/johndoe",
     website: "johndoe.dev",
+    photo: "", // Will be populated when user uploads a photo
   },
   summary:
     "Experienced Software Engineer with 5+ years of expertise in full-stack development, cloud architecture, and team leadership. Passionate about building scalable applications and mentoring junior developers. Proven track record of delivering high-quality software solutions that drive business growth.",
