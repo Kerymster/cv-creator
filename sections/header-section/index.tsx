@@ -10,13 +10,19 @@ interface HeaderSectionProps {
 const HeaderSection = ({ currentTheme, cvData }: HeaderSectionProps) => {
   return (
     <div className="text-center mb-8">
-      <h1 className={`text-4xl font-bold ${currentTheme.text} mb-2`}>
+      <h1
+        className={`text-4xl ${currentTheme.headingFont} font-bold ${currentTheme.text} mb-2`}
+      >
         {cvData.personalInfo.name}
       </h1>
-      <p className={`text-xl ${currentTheme.accent} mb-4`}>
+      <p
+        className={`text-xl ${currentTheme.headingFont} font-medium ${currentTheme.accent} mb-4`}
+      >
         {cvData.personalInfo.title}
       </p>
-      <div className="flex flex-wrap justify-center gap-4 text-sm">
+      <div
+        className={`flex flex-wrap justify-center gap-4 text-sm ${currentTheme.bodyFont}`}
+      >
         <span className={`${currentTheme.text}`}>
           📧 {cvData.personalInfo.email}
         </span>
@@ -27,22 +33,24 @@ const HeaderSection = ({ currentTheme, cvData }: HeaderSectionProps) => {
           📍 {cvData.personalInfo.location}
         </span>
       </div>
-      <div className="flex justify-center gap-4 mt-2">
+      <div
+        className={`flex justify-center gap-4 mt-2 ${currentTheme.bodyFont}`}
+      >
         <a
           href={`https://${cvData.personalInfo.linkedin}`}
-          className={`${currentTheme.accent} hover:underline`}
+          className={`${currentTheme.accent} hover:underline font-medium`}
         >
           LinkedIn
         </a>
         <a
           href={`https://${cvData.personalInfo.github}`}
-          className={`${currentTheme.accent} hover:underline`}
+          className={`${currentTheme.accent} hover:underline font-medium`}
         >
           GitHub
         </a>
         <a
           href={`https://${cvData.personalInfo.website}`}
-          className={`${currentTheme.accent} hover:underline`}
+          className={`${currentTheme.accent} hover:underline font-medium`}
         >
           Website
         </a>

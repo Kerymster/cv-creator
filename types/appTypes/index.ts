@@ -4,6 +4,23 @@ export interface ThemeColors {
   accent: string;
   border: string;
   card: string;
+  headingFont: string;
+  bodyFont: string;
 }
 
-export type Theme = "light" | "dark" | "blue";
+export type Theme =
+  | "light"
+  | "dark"
+  | "blue"
+  | "slateAmber"
+  | "slateAmberDark"
+  | "emerald"
+  | "violet"
+  | "rose";
+
+export type Font =
+  | "inter"
+  | "poppins"
+  | "source-sans"
+  | "nunito-sans"
+  | "geist";

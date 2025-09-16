@@ -1,11 +1,21 @@
-import { ThemeColors } from "@/types/appTypes";
+import { ThemeColors, Font } from "@/types/appTypes";
 import React from "react";
 
 interface ControlPanelProps {
   currentTheme: ThemeColors;
+  headingFont: Font;
+  bodyFont: Font;
+  setHeadingFont: (font: Font) => void;
+  setBodyFont: (font: Font) => void;
 }
 
-const ControlPanel = ({ currentTheme }: ControlPanelProps) => {
+const ControlPanel = ({
+  currentTheme,
+  headingFont,
+  bodyFont,
+  setHeadingFont,
+  setBodyFont,
+}: ControlPanelProps) => {
   const handlePrintPDF = () => {
     window.print();
   };
@@ -14,11 +24,59 @@ const ControlPanel = ({ currentTheme }: ControlPanelProps) => {
     <div
       className={`${currentTheme.card} rounded-lg shadow-lg p-6 ${currentTheme.border} border sticky top-8`}
     >
-      <h2 className={`text-xl font-bold ${currentTheme.text} mb-6`}>
+      <h2
+        className={`text-xl ${currentTheme.headingFont} font-bold ${currentTheme.text} mb-6`}
+      >
         Customize Your CV
       </h2>
 
       <div className="space-y-6">
+        <div>
+          <h3
+            className={`${currentTheme.headingFont} font-semibold ${currentTheme.text} mb-3`}
+          >
+            Font Selection
+          </h3>
+          <div className="space-y-4">
+            <div>
+              <label
+                className={`block text-sm ${currentTheme.text} ${currentTheme.bodyFont} mb-2`}
+              >
+                Heading Font
+              </label>
+              <select
+                value={headingFont}
+                onChange={(e) => setHeadingFont(e.target.value as Font)}
+                className={`w-full p-2 rounded border ${currentTheme.border} ${currentTheme.bg} ${currentTheme.text} ${currentTheme.bodyFont}`}
+              >
+                <option value="poppins">Poppins (Modern)</option>
+                <option value="inter">Inter (Clean)</option>
+                <option value="source-sans">Source Sans (Professional)</option>
+                <option value="nunito-sans">Nunito Sans (Friendly)</option>
+                <option value="geist">Geist (Tech)</option>
+              </select>
+            </div>
+            <div>
+              <label
+                className={`block text-sm ${currentTheme.text} ${currentTheme.bodyFont} mb-2`}
+              >
+                Body Font
+              </label>
+              <select
+                value={bodyFont}
+                onChange={(e) => setBodyFont(e.target.value as Font)}
+                className={`w-full p-2 rounded border ${currentTheme.border} ${currentTheme.bg} ${currentTheme.text} ${currentTheme.bodyFont}`}
+              >
+                <option value="inter">Inter (Clean)</option>
+                <option value="poppins">Poppins (Modern)</option>
+                <option value="source-sans">Source Sans (Professional)</option>
+                <option value="nunito-sans">Nunito Sans (Friendly)</option>
+                <option value="geist">Geist (Tech)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
         <div>
           <h3 className={`font-semibold ${currentTheme.text} mb-3`}>
             Export Options
