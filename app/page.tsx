@@ -41,6 +41,7 @@ export default function Home() {
           {/* CV Preview */}
           <div className="lg:col-span-2">
             <div
+              id="cv-content"
               className={`${currentTheme.card} rounded-lg shadow-lg p-8 ${currentTheme.border} border`}
             >
               {/* Header Section */}

@@ -6,6 +6,10 @@ interface ControlPanelProps {
 }
 
 const ControlPanel = ({ currentTheme }: ControlPanelProps) => {
+  const handlePrintPDF = () => {
+    window.print();
+  };
+
   return (
     <div
       className={`${currentTheme.card} rounded-lg shadow-lg p-6 ${currentTheme.border} border sticky top-8`}
@@ -21,6 +25,7 @@ const ControlPanel = ({ currentTheme }: ControlPanelProps) => {
           </h3>
           <div className="space-y-2">
             <button
+              onClick={handlePrintPDF}
               className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors`}
             >
               📄 Export as PDF
