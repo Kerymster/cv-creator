@@ -11,11 +11,15 @@ const Summary = ({ currentTheme, cvData }: SummaryProps) => {
   return (
     <section className="mb-8">
       <h2
-        className={`text-2xl font-bold ${currentTheme.text} mb-4 border-b ${currentTheme.border} pb-2`}
+        className={`text-2xl ${currentTheme.headingFont} font-bold ${currentTheme.text} mb-4 border-b ${currentTheme.border} pb-2`}
       >
         Professional Summary
       </h2>
-      <p className={`${currentTheme.text} leading-relaxed`}>{cvData.summary}</p>
+      <p
+        className={`${currentTheme.text} leading-relaxed ${currentTheme.bodyFont}`}
+      >
+        {cvData.summary}
+      </p>
     </section>
   );
 };

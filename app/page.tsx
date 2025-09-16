@@ -11,19 +11,25 @@ import ProfessionalExperience from "@/sections/professional-experience";
 import Projects from "@/sections/projects";
 import Summary from "@/sections/summary";
 import TechnicalSkills from "@/sections/technical-skills";
-import { Theme } from "@/types/appTypes";
+import { Theme, Font } from "@/types/appTypes";
 import { CVData } from "@/types/cvTypes/interfaces";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const [cvData, setCvData] = useState<CVData>();
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("slateAmber");
+  const [headingFont, setHeadingFont] = useState<Font>("poppins");
+  const [bodyFont, setBodyFont] = useState<Font>("inter");
 
   useEffect(() => {
     setCvData(defaultCVData);
   }, []);
 
-  const currentTheme = themes[theme];
+  const currentTheme = {
+    ...themes[theme],
+    headingFont: `font-${headingFont}`,
+    bodyFont: `font-${bodyFont}`,
+  };
 
   if (!cvData) {
     return <div>Loading...</div>;
@@ -72,7 +78,13 @@ export default function Home() {
 
           {/* Controls Panel */}
           <div className="lg:col-span-1">
-            <ControlPanel currentTheme={currentTheme} />
+            <ControlPanel
+              currentTheme={currentTheme}
+              headingFont={headingFont}
+              bodyFont={bodyFont}
+              setHeadingFont={setHeadingFont}
+              setBodyFont={setBodyFont}
+            />
           </div>
         </div>
       </div>
