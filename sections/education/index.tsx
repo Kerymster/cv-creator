@@ -1,6 +1,6 @@
-import { ThemeColors } from "@/types/appTypes";
-import { CVData } from "@/types/cvTypes/interfaces";
-import React from "react";
+import { ThemeColors } from '@/types/appTypes';
+import { CVData } from '@/types/cvTypes/interfaces';
+import React from 'react';
 
 interface EducationProps {
   currentTheme: ThemeColors;
@@ -17,7 +17,7 @@ const Education = ({ currentTheme, cvData }: EducationProps) => {
       </h2>
       {cvData.education.map((edu, index) => (
         <div key={index} className="mb-4">
-          <div className="flex justify-between items-start">
+          <div className="flex items-start justify-between">
             <div>
               <h3
                 className={`text-lg ${currentTheme.headingFont} font-semibold ${currentTheme.text}`}

@@ -1,14 +1,14 @@
-import React from "react";
-import { ThemeColors } from "@/types/appTypes";
-import { CVData } from "@/types/cvTypes/interfaces";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import { ThemeColors } from '@/types/appTypes';
+import { CVData } from '@/types/cvTypes/interfaces';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEnvelope,
   faPhone,
   faMapMarkerAlt,
   faGlobe,
-} from "@fortawesome/free-solid-svg-icons";
-import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
+import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 interface ContentSectionProps {
   currentTheme: ThemeColors;
@@ -36,18 +36,18 @@ const ContentSection = ({ currentTheme, cvData }: ContentSectionProps) => {
         <span className={`${currentTheme.text} flex items-center gap-2`}>
           <FontAwesomeIcon
             icon={faEnvelope}
-            className="text-gray-500 w-4 h-4"
+            className="h-4 w-4 text-gray-500"
           />
           {cvData.personalInfo.email}
         </span>
         <span className={`${currentTheme.text} flex items-center gap-2`}>
-          <FontAwesomeIcon icon={faPhone} className="text-gray-500 w-4 h-4" />
+          <FontAwesomeIcon icon={faPhone} className="h-4 w-4 text-gray-500" />
           {cvData.personalInfo.phone}
         </span>
         <span className={`${currentTheme.text} flex items-center gap-2`}>
           <FontAwesomeIcon
             icon={faMapMarkerAlt}
-            className="text-gray-500 w-4 h-4"
+            className="h-4 w-4 text-gray-500"
           />
           {cvData.personalInfo.location}
         </span>
@@ -60,16 +60,16 @@ const ContentSection = ({ currentTheme, cvData }: ContentSectionProps) => {
         <span className={`${currentTheme.text} flex items-center gap-2`}>
           <FontAwesomeIcon
             icon={faLinkedin}
-            className="text-gray-500 w-4 h-4"
+            className="h-4 w-4 text-gray-500"
           />
           {cvData.personalInfo.linkedin}
         </span>
         <span className={`${currentTheme.text} flex items-center gap-2`}>
-          <FontAwesomeIcon icon={faGithub} className="text-gray-500 w-4 h-4" />
+          <FontAwesomeIcon icon={faGithub} className="h-4 w-4 text-gray-500" />
           {cvData.personalInfo.github}
         </span>
         <span className={`${currentTheme.text} flex items-center gap-2`}>
-          <FontAwesomeIcon icon={faGlobe} className="text-gray-500 w-4 h-4" />
+          <FontAwesomeIcon icon={faGlobe} className="h-4 w-4 text-gray-500" />
           {cvData.personalInfo.website}
         </span>
       </div>
