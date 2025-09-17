@@ -1,6 +1,14 @@
 import React from "react";
 import { ThemeColors } from "@/types/appTypes";
 import { CVData } from "@/types/cvTypes/interfaces";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEnvelope,
+  faPhone,
+  faMapMarkerAlt,
+  faGlobe,
+} from "@fortawesome/free-solid-svg-icons";
+import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 
 interface ContentSectionProps {
   currentTheme: ThemeColors;
@@ -25,16 +33,22 @@ const ContentSection = ({ currentTheme, cvData }: ContentSectionProps) => {
       <div
         className={`flex flex-wrap justify-start gap-4 text-sm ${currentTheme.bodyFont} mb-3`}
       >
-        <span className={`${currentTheme.text} flex items-center gap-1`}>
-          <span className="text-gray-500">📧</span>
+        <span className={`${currentTheme.text} flex items-center gap-2`}>
+          <FontAwesomeIcon
+            icon={faEnvelope}
+            className="text-gray-500 w-4 h-4"
+          />
           {cvData.personalInfo.email}
         </span>
-        <span className={`${currentTheme.text} flex items-center gap-1`}>
-          <span className="text-gray-500">📱</span>
+        <span className={`${currentTheme.text} flex items-center gap-2`}>
+          <FontAwesomeIcon icon={faPhone} className="text-gray-500 w-4 h-4" />
           {cvData.personalInfo.phone}
         </span>
-        <span className={`${currentTheme.text} flex items-center gap-1`}>
-          <span className="text-gray-500">📍</span>
+        <span className={`${currentTheme.text} flex items-center gap-2`}>
+          <FontAwesomeIcon
+            icon={faMapMarkerAlt}
+            className="text-gray-500 w-4 h-4"
+          />
           {cvData.personalInfo.location}
         </span>
       </div>
@@ -43,16 +57,19 @@ const ContentSection = ({ currentTheme, cvData }: ContentSectionProps) => {
       <div
         className={`flex flex-wrap justify-start gap-4 text-sm ${currentTheme.bodyFont}`}
       >
-        <span className={`${currentTheme.text} flex items-center gap-1`}>
-          <span className="text-gray-500">💼</span>
+        <span className={`${currentTheme.text} flex items-center gap-2`}>
+          <FontAwesomeIcon
+            icon={faLinkedin}
+            className="text-gray-500 w-4 h-4"
+          />
           {cvData.personalInfo.linkedin}
         </span>
-        <span className={`${currentTheme.text} flex items-center gap-1`}>
-          <span className="text-gray-500">🐙</span>
+        <span className={`${currentTheme.text} flex items-center gap-2`}>
+          <FontAwesomeIcon icon={faGithub} className="text-gray-500 w-4 h-4" />
           {cvData.personalInfo.github}
         </span>
-        <span className={`${currentTheme.text} flex items-center gap-1`}>
-          <span className="text-gray-500">🌐</span>
+        <span className={`${currentTheme.text} flex items-center gap-2`}>
+          <FontAwesomeIcon icon={faGlobe} className="text-gray-500 w-4 h-4" />
           {cvData.personalInfo.website}
         </span>
       </div>

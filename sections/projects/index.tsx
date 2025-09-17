@@ -1,6 +1,8 @@
 import { ThemeColors } from "@/types/appTypes";
 import { CVData } from "@/types/cvTypes/interfaces";
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getSkillIcon, getSkillIconColor } from "@/utils/skillsIcons";
 
 interface ProjectsProps {
   currentTheme: ThemeColors;
@@ -38,14 +40,24 @@ const Projects = ({ currentTheme, cvData }: ProjectsProps) => {
             {project.description}
           </p>
           <div className="flex flex-wrap gap-2">
-            {project.technologies.map((tech, techIndex) => (
-              <span
-                key={techIndex}
-                className={`px-2 py-1 ${currentTheme.card} rounded text-xs ${currentTheme.text} ${currentTheme.bodyFont}`}
-              >
-                {tech}
-              </span>
-            ))}
+            {project.technologies.map((tech, techIndex) => {
+              const icon = getSkillIcon(tech);
+              const iconColor = getSkillIconColor(tech);
+
+              return (
+                <span
+                  key={techIndex}
+                  className={`px-2 py-1 ${currentTheme.card} rounded text-xs ${currentTheme.text} ${currentTheme.bodyFont} flex items-center gap-1 border ${currentTheme.border}`}
+                >
+                  <FontAwesomeIcon
+                    icon={icon}
+                    className="w-3 h-3"
+                    style={{ color: iconColor }}
+                  />
+                  {tech}
+                </span>
+              );
+            })}
           </div>
         </div>
       ))}

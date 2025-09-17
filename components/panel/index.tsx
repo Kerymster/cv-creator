@@ -1,6 +1,17 @@
 import { ThemeColors, Font } from "@/types/appTypes";
 import { CVData } from "@/types/cvTypes/interfaces";
 import React, { useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUser,
+  faFilePdf,
+  faCopy,
+  faSave,
+  faEdit,
+  faPalette,
+  faPlus,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 
 interface ControlPanelProps {
   currentTheme: ThemeColors;
@@ -116,12 +127,15 @@ const ControlPanel = ({
                     onClick={handleRemovePhoto}
                     className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600 cursor-pointer"
                   >
-                    ×
+                    <FontAwesomeIcon icon={faTimes} className="text-xs" />
                   </button>
                 </div>
               ) : (
                 <div className="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center border-2 border-dashed border-gray-300">
-                  <span className="text-gray-400 text-2xl">👤</span>
+                  <FontAwesomeIcon
+                    icon={faUser}
+                    className="text-gray-400 text-2xl"
+                  />
                 </div>
               )}
               <button
@@ -199,19 +213,22 @@ const ControlPanel = ({
           <div className="space-y-2">
             <button
               onClick={handlePrintPDF}
-              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer`}
+              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer flex items-center justify-center gap-2`}
             >
-              📄 Export as PDF
+              <FontAwesomeIcon icon={faFilePdf} className="w-4 h-4" />
+              Export as PDF
             </button>
             <button
-              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer`}
+              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer flex items-center justify-center gap-2`}
             >
-              📋 Copy to Clipboard
+              <FontAwesomeIcon icon={faCopy} className="w-4 h-4" />
+              Copy to Clipboard
             </button>
             <button
-              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer`}
+              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer flex items-center justify-center gap-2`}
             >
-              💾 Save Template
+              <FontAwesomeIcon icon={faSave} className="w-4 h-4" />
+              Save Template
             </button>
           </div>
         </div>
@@ -222,19 +239,22 @@ const ControlPanel = ({
           </h3>
           <div className="space-y-2">
             <button
-              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer`}
+              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer flex items-center justify-center gap-2`}
             >
-              ✏️ Edit Information
+              <FontAwesomeIcon icon={faEdit} className="w-4 h-4" />
+              Edit Information
             </button>
             <button
-              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer`}
+              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer flex items-center justify-center gap-2`}
             >
-              🎨 Customize Colors
+              <FontAwesomeIcon icon={faPalette} className="w-4 h-4" />
+              Customize Colors
             </button>
             <button
-              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer`}
+              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer flex items-center justify-center gap-2`}
             >
-              📝 Add Section
+              <FontAwesomeIcon icon={faPlus} className="w-4 h-4" />
+              Add Section
             </button>
           </div>
         </div>
