@@ -1,7 +1,7 @@
-import { ThemeColors, Font } from "@/types/appTypes";
-import { CVData } from "@/types/cvTypes/interfaces";
-import React, { useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ThemeColors, Font } from '@/types/appTypes';
+import { CVData } from '@/types/cvTypes/interfaces';
+import React, { useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUser,
   faFilePdf,
@@ -11,7 +11,8 @@ import {
   faPalette,
   faPlus,
   faTimes,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 
 interface ControlPanelProps {
   currentTheme: ThemeColors;
@@ -20,7 +21,7 @@ interface ControlPanelProps {
   setHeadingFont: (font: Font) => void;
   setBodyFont: (font: Font) => void;
   cvData: CVData;
-  updateCVData: (data: CVData) => void;
+  updateCVData: (updates: Partial<CVData>) => void;
 }
 
 const ControlPanel = ({
@@ -42,21 +43,21 @@ const ControlPanel = ({
     const file = event.target.files?.[0];
     if (file) {
       // Check file type
-      if (!file.type.startsWith("image/")) {
-        alert("Please select an image file");
+      if (!file.type.startsWith('image/')) {
+        alert('Please select an image file');
         // Reset file input
         if (fileInputRef.current) {
-          fileInputRef.current.value = "";
+          fileInputRef.current.value = '';
         }
         return;
       }
 
       // Check file size (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
-        alert("Image size should be less than 5MB");
+        alert('Image size should be less than 5MB');
         // Reset file input
         if (fileInputRef.current) {
-          fileInputRef.current.value = "";
+          fileInputRef.current.value = '';
         }
         return;
       }
@@ -74,7 +75,7 @@ const ControlPanel = ({
         updateCVData(updatedCVData);
         // Reset file input after successful upload
         if (fileInputRef.current) {
-          fileInputRef.current.value = "";
+          fileInputRef.current.value = '';
         }
       };
       reader.readAsDataURL(file);
@@ -86,7 +87,7 @@ const ControlPanel = ({
       ...cvData,
       personalInfo: {
         ...cvData.personalInfo,
-        photo: "",
+        photo: '',
       },
     };
     updateCVData(updatedCVData);
@@ -98,7 +99,7 @@ const ControlPanel = ({
 
   return (
     <div
-      className={`${currentTheme.card} rounded-lg shadow-lg p-6 ${currentTheme.border} border sticky top-8`}
+      className={`${currentTheme.card} rounded-lg p-6 shadow-lg ${currentTheme.border} sticky top-8 border`}
     >
       <h2
         className={`text-xl ${currentTheme.headingFont} font-bold ${currentTheme.text} mb-6`}
@@ -118,31 +119,31 @@ const ControlPanel = ({
             <div className="flex flex-col items-center space-y-3">
               {cvData.personalInfo.photo ? (
                 <div className="relative">
-                  <img
+                  <Image
                     src={cvData.personalInfo.photo}
                     alt="Profile preview"
-                    className="w-20 h-20 rounded-full object-cover border-2 border-gray-300"
+                    className="h-20 w-20 rounded-full border-2 border-gray-300 object-cover"
                   />
                   <button
                     onClick={handleRemovePhoto}
-                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600 cursor-pointer"
+                    className="absolute -top-2 -right-2 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-red-500 text-xs text-white hover:bg-red-600"
                   >
                     <FontAwesomeIcon icon={faTimes} className="text-xs" />
                   </button>
                 </div>
               ) : (
-                <div className="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center border-2 border-dashed border-gray-300">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed border-gray-300 bg-gray-200">
                   <FontAwesomeIcon
                     icon={faUser}
-                    className="text-gray-400 text-2xl"
+                    className="text-2xl text-gray-400"
                   />
                 </div>
               )}
               <button
                 onClick={handleImageClick}
-                className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors text-sm cursor-pointer`}
+                className={`w-full px-4 py-2 ${currentTheme.accent} bg-opacity-10 hover:bg-opacity-20 cursor-pointer rounded text-sm transition-colors`}
               >
-                {cvData.personalInfo.photo ? "Change Photo" : "Upload Photo"}
+                {cvData.personalInfo.photo ? 'Change Photo' : 'Upload Photo'}
               </button>
               <input
                 ref={fileInputRef}
@@ -176,7 +177,7 @@ const ControlPanel = ({
               <select
                 value={headingFont}
                 onChange={(e) => setHeadingFont(e.target.value as Font)}
-                className={`w-full p-2 rounded border ${currentTheme.border} ${currentTheme.bg} ${currentTheme.text} ${currentTheme.bodyFont} cursor-pointer`}
+                className={`w-full rounded border p-2 ${currentTheme.border} ${currentTheme.bg} ${currentTheme.text} ${currentTheme.bodyFont} cursor-pointer`}
               >
                 <option value="poppins">Poppins (Modern)</option>
                 <option value="inter">Inter (Clean)</option>
@@ -194,7 +195,7 @@ const ControlPanel = ({
               <select
                 value={bodyFont}
                 onChange={(e) => setBodyFont(e.target.value as Font)}
-                className={`w-full p-2 rounded border ${currentTheme.border} ${currentTheme.bg} ${currentTheme.text} ${currentTheme.bodyFont} cursor-pointer`}
+                className={`w-full rounded border p-2 ${currentTheme.border} ${currentTheme.bg} ${currentTheme.text} ${currentTheme.bodyFont} cursor-pointer`}
               >
                 <option value="inter">Inter (Clean)</option>
                 <option value="poppins">Poppins (Modern)</option>
@@ -213,21 +214,21 @@ const ControlPanel = ({
           <div className="space-y-2">
             <button
               onClick={handlePrintPDF}
-              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer flex items-center justify-center gap-2`}
+              className={`w-full px-4 py-2 ${currentTheme.accent} bg-opacity-10 hover:bg-opacity-20 flex cursor-pointer items-center justify-center gap-2 rounded transition-colors`}
             >
-              <FontAwesomeIcon icon={faFilePdf} className="w-4 h-4" />
+              <FontAwesomeIcon icon={faFilePdf} className="h-4 w-4" />
               Export as PDF
             </button>
             <button
-              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer flex items-center justify-center gap-2`}
+              className={`w-full px-4 py-2 ${currentTheme.accent} bg-opacity-10 hover:bg-opacity-20 flex cursor-pointer items-center justify-center gap-2 rounded transition-colors`}
             >
-              <FontAwesomeIcon icon={faCopy} className="w-4 h-4" />
+              <FontAwesomeIcon icon={faCopy} className="h-4 w-4" />
               Copy to Clipboard
             </button>
             <button
-              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer flex items-center justify-center gap-2`}
+              className={`w-full px-4 py-2 ${currentTheme.accent} bg-opacity-10 hover:bg-opacity-20 flex cursor-pointer items-center justify-center gap-2 rounded transition-colors`}
             >
-              <FontAwesomeIcon icon={faSave} className="w-4 h-4" />
+              <FontAwesomeIcon icon={faSave} className="h-4 w-4" />
               Save Template
             </button>
           </div>
@@ -239,21 +240,21 @@ const ControlPanel = ({
           </h3>
           <div className="space-y-2">
             <button
-              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer flex items-center justify-center gap-2`}
+              className={`w-full px-4 py-2 ${currentTheme.accent} bg-opacity-10 hover:bg-opacity-20 flex cursor-pointer items-center justify-center gap-2 rounded transition-colors`}
             >
-              <FontAwesomeIcon icon={faEdit} className="w-4 h-4" />
+              <FontAwesomeIcon icon={faEdit} className="h-4 w-4" />
               Edit Information
             </button>
             <button
-              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer flex items-center justify-center gap-2`}
+              className={`w-full px-4 py-2 ${currentTheme.accent} bg-opacity-10 hover:bg-opacity-20 flex cursor-pointer items-center justify-center gap-2 rounded transition-colors`}
             >
-              <FontAwesomeIcon icon={faPalette} className="w-4 h-4" />
+              <FontAwesomeIcon icon={faPalette} className="h-4 w-4" />
               Customize Colors
             </button>
             <button
-              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer flex items-center justify-center gap-2`}
+              className={`w-full px-4 py-2 ${currentTheme.accent} bg-opacity-10 hover:bg-opacity-20 flex cursor-pointer items-center justify-center gap-2 rounded transition-colors`}
             >
-              <FontAwesomeIcon icon={faPlus} className="w-4 h-4" />
+              <FontAwesomeIcon icon={faPlus} className="h-4 w-4" />
               Add Section
             </button>
           </div>
@@ -265,17 +266,17 @@ const ControlPanel = ({
           </h3>
           <div className="space-y-2">
             <button
-              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer`}
+              className={`w-full px-4 py-2 ${currentTheme.accent} bg-opacity-10 hover:bg-opacity-20 cursor-pointer rounded transition-colors`}
             >
               💼 Professional
             </button>
             <button
-              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer`}
+              className={`w-full px-4 py-2 ${currentTheme.accent} bg-opacity-10 hover:bg-opacity-20 cursor-pointer rounded transition-colors`}
             >
               🎨 Creative
             </button>
             <button
-              className={`w-full py-2 px-4 ${currentTheme.accent} bg-opacity-10 rounded hover:bg-opacity-20 transition-colors cursor-pointer`}
+              className={`w-full px-4 py-2 ${currentTheme.accent} bg-opacity-10 hover:bg-opacity-20 cursor-pointer rounded transition-colors`}
             >
               🚀 Modern
             </button>

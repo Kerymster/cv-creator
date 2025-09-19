@@ -9,7 +9,13 @@
     "start": "next start",
     "lint": "eslint",
     "type-check": "tsc --noEmit",
-    "prepare": "husky"
+    "prepare": "husky",
+    "firebase": "firebase",
+    "firebase:login": "firebase login",
+    "firebase:init": "firebase init",
+    "firebase:deploy": "firebase deploy",
+    "firebase:serve": "firebase serve",
+    "firebase:emulators": "firebase emulators:start"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -24,6 +30,7 @@
     "@fortawesome/free-brands-svg-icons": "^7.0.1",
     "@fortawesome/free-solid-svg-icons": "^7.0.1",
     "@fortawesome/react-fontawesome": "^3.0.2",
+    "firebase": "^12.3.0",
     "next": "15.5.3",
     "react": "19.1.0",
     "react-dom": "19.1.0"
@@ -37,6 +44,7 @@
     "concurrently": "^8.2.2",
     "eslint": "^9",
     "eslint-config-next": "15.5.3",
+    "firebase-tools": "^14.17.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
