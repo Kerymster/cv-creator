@@ -1,23 +1,17 @@
 import { Theme, ThemeColors } from '@/types/appTypes';
 import React from 'react';
 import AuthButton from '@/components/auth/AuthButton';
-import SaveButton from '@/components/cv/SaveButton';
-import { CVData } from '@/types/cvTypes/interfaces';
 
 interface HeaderProps {
   currentTheme: ThemeColors;
   setTheme: (theme: Theme) => void;
   theme: Theme;
-  cvData: CVData;
-  onSave: () => Promise<void>;
 }
 
 const Header = ({
   currentTheme,
   setTheme,
   theme,
-  cvData,
-  onSave,
 }: HeaderProps) => {
   return (
     <div
@@ -31,7 +25,6 @@ const Header = ({
             CV Creator
           </h1>
           <div className="flex items-center gap-4">
-            <SaveButton cvData={cvData} onSave={onSave} />
             <AuthButton />
           </div>
         </div>

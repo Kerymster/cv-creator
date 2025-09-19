@@ -19,9 +19,9 @@ import { db } from '@/lib/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export default function Home() {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const [cvData, setCvData] = useState<CVData>(defaultCVData);
-  const [loading, setLoading] = useState(false);
+  const [cvSaving, setCvSaving] = useState(false);
   const [theme, setTheme] = useState<Theme>('slateAmber');
   const [headingFont, setHeadingFont] = useState<Font>('poppins');
   const [bodyFont, setBodyFont] = useState<Font>('inter');
@@ -37,7 +37,6 @@ export default function Home() {
     if (!user) return;
 
     try {
-      setLoading(true);
       const docRef = doc(db, 'cvData', user.uid);
       const docSnap = await getDoc(docRef);
 
@@ -47,8 +46,6 @@ export default function Home() {
     } catch (error) {
       console.error('Error loading CV data:', error);
       console.log('No saved CV data found, using default');
-    } finally {
-      setLoading(false);
     }
   }, [user]);
 
@@ -57,14 +54,14 @@ export default function Home() {
     if (!user) return;
 
     try {
-      setLoading(true);
+      setCvSaving(true);
       const docRef = doc(db, 'cvData', user.uid);
       await setDoc(docRef, cvData);
       console.log('CV saved successfully!');
     } catch (error) {
       console.error('Failed to save CV:', error);
     } finally {
-      setLoading(false);
+      setCvSaving(false);
     }
   };
 
@@ -82,12 +79,13 @@ export default function Home() {
     }
   }, [user, loadCVData]);
 
-  if (loading) {
+  // Show loading only during initial auth check
+  if (authLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-50">
         <div className="text-center">
           <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-blue-600"></div>
-          <p className="text-gray-600">Loading your CV...</p>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );
@@ -96,13 +94,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50 transition-colors duration-300">
       {/* Header */}
-      <Header
-        currentTheme={currentTheme}
-        setTheme={setTheme}
-        theme={theme}
-        cvData={cvData}
-        onSave={saveCVData}
-      />
+      <Header currentTheme={currentTheme} setTheme={setTheme} theme={theme} />
 
       <div className="mx-auto max-w-6xl px-4 py-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -148,6 +140,8 @@ export default function Home() {
               setBodyFont={setBodyFont}
               cvData={cvData}
               updateCVData={updateCVData}
+              onSave={saveCVData}
+              cvSaving={cvSaving}
             />
           </div>
         </div>
