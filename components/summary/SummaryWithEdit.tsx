@@ -7,6 +7,7 @@ import Summary from '@/sections/summary';
 import EditButton from '@/components/edit-button/EditButton';
 import ConfirmationDialog from '@/components/dialog/ConfirmationDialog';
 import SummaryEditForm from '@/components/forms/SummaryEditForm';
+import { toast } from 'react-toastify';
 
 interface SummaryWithEditProps {
   currentTheme: ThemeColors;
@@ -46,8 +47,8 @@ const SummaryWithEdit: React.FC<SummaryWithEditProps> = ({
       }
 
       setIsEditDialogOpen(false);
-    } catch (error) {
-      console.error('Failed to save changes:', error);
+    } catch {
+      toast.error('Failed to save changes. Please try again.');
     } finally {
       setIsEditing(false);
     }

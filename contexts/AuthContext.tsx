@@ -9,6 +9,7 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
+import { toast } from 'react-toastify';
 
 interface AuthContextType {
   user: User | null;
@@ -39,18 +40,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-    } catch (error) {
-      console.error('Error signing in with Google:', error);
+    } catch {
+      toast.error('Error signing in with Google. Please try again.');
     }
   };
 
   const logout = async () => {
     try {
-      console.log('Starting logout process...');
       await signOut(auth);
-      console.log('Logout successful');
-    } catch (error) {
-      console.error('Error signing out:', error);
+      toast.success('Logged out successfully');
+    } catch {
+      toast.error('Error signing out. Please try again.');
     }
   };
 
@@ -58,15 +58,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const unsubscribe = onAuthStateChanged(
       auth,
       (user) => {
-        console.log(
-          'Auth state changed:',
-          user ? 'User logged in' : 'User logged out'
-        );
+        if (user) {
+          toast.success(`Welcome back, ${user.displayName || user.email}!`);
+        }
         setUser(user);
         setLoading(false);
       },
-      (error) => {
-        console.error('Auth state change error:', error);
+      () => {
+        toast.error('Authentication error occurred');
         setLoading(false);
       }
     );
