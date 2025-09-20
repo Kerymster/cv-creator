@@ -223,7 +223,11 @@ const HeaderEditForm: React.FC<HeaderEditFormProps> = ({
         <button
           type="submit"
           disabled={!isDirty || isSaving}
-          className="rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-300"
+          className={`flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold shadow-lg transition-all duration-300 focus:outline-none ${
+            !isDirty || isSaving
+              ? 'cursor-not-allowed bg-gray-400 text-gray-200 opacity-60 hover:scale-100 hover:bg-gray-400 focus:ring-0'
+              : 'focus:ring-opacity-50 cursor-pointer bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:scale-105 hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-500'
+          }`}
         >
           {isSaving ? 'Saving...' : 'Save Changes'}
         </button>

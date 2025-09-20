@@ -2,20 +2,20 @@
 
 import React, { useState } from 'react';
 import { ThemeColors } from '@/types/appTypes';
-import { CVData, personalInfo } from '@/types/cvTypes/interfaces';
-import HeaderSection from '@/sections/header-section';
+import { CVData } from '@/types/cvTypes/interfaces';
+import Summary from '@/sections/summary';
 import EditButton from '@/components/edit-button/EditButton';
 import ConfirmationDialog from '@/components/dialog/ConfirmationDialog';
-import HeaderEditForm from '@/components/forms/HeaderEditForm';
+import SummaryEditForm from '@/components/forms/SummaryEditForm';
 
-interface HeaderWithEditProps {
+interface SummaryWithEditProps {
   currentTheme: ThemeColors;
   cvData: CVData;
   onDataUpdate?: (updatedData: CVData) => void;
   onSave?: (dataToSave: CVData) => Promise<void>;
 }
 
-const HeaderWithEdit: React.FC<HeaderWithEditProps> = ({
+const SummaryWithEdit: React.FC<SummaryWithEditProps> = ({
   currentTheme,
   cvData,
   onDataUpdate,
@@ -28,13 +28,13 @@ const HeaderWithEdit: React.FC<HeaderWithEditProps> = ({
     setIsEditDialogOpen(true);
   };
 
-  const handleSave = async (updatedPersonalInfo: personalInfo) => {
+  const handleSave = async (updatedSummary: string) => {
     setIsEditing(true);
 
     try {
       const updatedCVData: CVData = {
         ...cvData,
-        personalInfo: updatedPersonalInfo,
+        summary: updatedSummary,
       };
 
       if (onDataUpdate) {
@@ -64,18 +64,18 @@ const HeaderWithEdit: React.FC<HeaderWithEditProps> = ({
           onClick={handleEditClick}
           size="sm"
           variant="gradient"
-          title="Edit header information"
+          title="Edit professional summary"
         />
       </div>
 
-      {/* Header Section */}
-      <HeaderSection currentTheme={currentTheme} cvData={cvData} />
+      {/* Summary Section */}
+      <Summary currentTheme={currentTheme} cvData={cvData} />
 
       {/* Edit Dialog */}
       <ConfirmationDialog
         isOpen={isEditDialogOpen}
         onClose={handleCancel}
-        title="Edit Header Information"
+        title="Edit Professional Summary"
         hasConfirmButton={false}
         hasCloseButton={true}
         maxWidth="600px"
@@ -83,8 +83,8 @@ const HeaderWithEdit: React.FC<HeaderWithEditProps> = ({
         closeOnEscape={true}
         contentPadding="24px"
       >
-        <HeaderEditForm
-          initialData={cvData.personalInfo}
+        <SummaryEditForm
+          initialData={cvData.summary}
           onSave={handleSave}
           onCancel={handleCancel}
           isSaving={isEditing}
@@ -94,4 +94,4 @@ const HeaderWithEdit: React.FC<HeaderWithEditProps> = ({
   );
 };
 
-export default HeaderWithEdit;
+export default SummaryWithEdit;
