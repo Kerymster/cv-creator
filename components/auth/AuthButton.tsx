@@ -1,14 +1,38 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
+import { ThemeColors } from '@/types/appTypes';
 
-const AuthButton: React.FC = () => {
+interface AuthButtonProps {
+  currentTheme: ThemeColors;
+}
+
+const AuthButton: React.FC<AuthButtonProps> = ({ currentTheme }) => {
   const { user, loading, signInWithGoogle, logout } = useAuth();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   if (loading) {
     return (
@@ -20,26 +44,72 @@ const AuthButton: React.FC = () => {
 
   if (user) {
     return (
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2">
-          <Image
-            width={32}
-            height={32}
-            src={user.photoURL || ''}
-            alt={user.displayName || 'User'}
-            className="h-8 w-8 rounded-full"
-          />
-          <span className="text-sm text-gray-700">
-            {user.displayName || user.email}
-          </span>
-        </div>
+      <div className="relative" ref={dropdownRef}>
         <button
-          onClick={logout}
-          className="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-white transition-colors hover:bg-red-700"
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          className={`group flex cursor-pointer items-center gap-3 rounded-xl px-4 py-2.5 transition-all duration-200 hover:shadow-sm focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none ${
+            currentTheme.text
+          } hover:${currentTheme.card} ${
+            isDropdownOpen ? `${currentTheme.card} shadow-sm` : ''
+          }`}
         >
-          <FontAwesomeIcon icon={faSignOutAlt} />
-          Sign Out
+          <div className="relative">
+            <Image
+              width={36}
+              height={36}
+              src={user.photoURL || ''}
+              alt={user.displayName || 'User'}
+              className="h-9 w-9 rounded-full shadow-sm ring-2 ring-white transition-all duration-200 group-hover:ring-blue-200"
+            />
+            <div className="absolute -right-0.5 -bottom-0.5 h-3 w-3 rounded-full bg-green-400 ring-2 ring-white"></div>
+          </div>
+          <div className="flex flex-col items-start">
+            <span className={`text-sm font-semibold ${currentTheme.text}`}>
+              {user.displayName || 'User'}
+            </span>
+            <span className={`text-xs ${currentTheme.text} opacity-70`}>
+              {user.email}
+            </span>
+          </div>
+          <FontAwesomeIcon
+            icon={faChevronDown}
+            className={`ml-1 text-xs transition-all duration-200 ${
+              currentTheme.text
+            } opacity-60 ${
+              isDropdownOpen
+                ? 'rotate-180 opacity-100'
+                : 'group-hover:opacity-100'
+            }`}
+          />
         </button>
+
+        {isDropdownOpen && (
+          <div className="animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 absolute right-0 z-50 mt-3 w-64 duration-200">
+            <div
+              className={`overflow-hidden rounded-xl shadow-xl ring-1 ring-gray-200/50 backdrop-blur-sm ${currentTheme.bg}`}
+            >
+              <div className="p-4">
+                <div>
+                  <button
+                    onClick={() => {
+                      logout();
+                      setIsDropdownOpen(false);
+                    }}
+                    className="flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-red-600 transition-all duration-200 hover:bg-red-50 hover:text-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-1 focus:outline-none"
+                  >
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-red-100">
+                      <FontAwesomeIcon
+                        icon={faSignOutAlt}
+                        className="text-xs"
+                      />
+                    </div>
+                    <span>Logout</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -47,10 +117,14 @@ const AuthButton: React.FC = () => {
   return (
     <button
       onClick={signInWithGoogle}
-      className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
+      className="group flex cursor-pointer items-center gap-3 rounded-xl border-2 border-gray-200 bg-white px-4 py-2 shadow-sm transition-all duration-200 hover:border-gray-300 hover:bg-gray-50 hover:shadow-lg focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
     >
-      <FontAwesomeIcon icon={faGoogle} />
-      Sign in with Google
+      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white shadow-sm ring-1 ring-gray-200 group-hover:shadow-md group-hover:ring-gray-300">
+        <FontAwesomeIcon icon={faGoogle} className="text-blue-600" />
+      </div>
+      <span className="text-sm font-semibold text-gray-900 group-hover:text-gray-700">
+        Sign in
+      </span>
     </button>
   );
 };
