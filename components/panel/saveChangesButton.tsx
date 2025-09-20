@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSpinner,
@@ -7,6 +7,7 @@ import {
   faSave,
 } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'firebase/auth';
+import ConfirmationDialog from '@/components/dialog/ConfirmationDialog';
 
 interface SaveChangesButtonProps {
   handleSave: () => void;
@@ -21,12 +22,27 @@ const SaveChangesButton = ({
   saveStatus,
   user,
 }: SaveChangesButtonProps) => {
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+
+  const handleSaveClick = () => {
+    setShowConfirmDialog(true);
+  };
+
+  const handleConfirmSave = () => {
+    handleSave();
+    setShowConfirmDialog(false);
+  };
+
+  const handleCancelSave = () => {
+    setShowConfirmDialog(false);
+  };
+
   return (
     <div className="mt-8">
       <button
-        onClick={handleSave}
+        onClick={handleSaveClick}
         disabled={isLoading || !user}
-        className={`focus:ring-opacity-50 flex w-full transform items-center justify-center gap-3 rounded-xl px-6 py-4 text-lg font-semibold shadow-lg transition-all duration-300 hover:scale-105 focus:ring-4 focus:outline-none ${
+        className={`focus:ring-opacity-50 flex w-full transform cursor-pointer items-center justify-center gap-3 rounded-xl px-6 py-4 text-lg font-semibold shadow-lg transition-all duration-300 hover:scale-105 focus:ring-4 focus:outline-none ${
           saveStatus === 'success'
             ? 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500'
             : saveStatus === 'error'
@@ -58,6 +74,25 @@ const SaveChangesButton = ({
           </>
         )}
       </button>
+
+      {/* Confirmation Dialog */}
+      <ConfirmationDialog
+        isOpen={showConfirmDialog}
+        onClose={handleCancelSave}
+        onConfirm={handleConfirmSave}
+        onReject={handleCancelSave}
+        title="Save Changes"
+        positiveMessage="Yes, Save"
+        negativeMessage="Cancel"
+        titleIcon={<FontAwesomeIcon icon={faSave} className="text-blue-600" />}
+      >
+        <div className="py-4">
+          <p className="text-gray-700">
+            Are you sure you want to save your changes? This will update your CV
+            with the current information.
+          </p>
+        </div>
+      </ConfirmationDialog>
     </div>
   );
 };
