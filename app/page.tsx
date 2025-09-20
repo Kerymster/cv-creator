@@ -17,6 +17,7 @@ import { CVData } from '@/types/cvTypes/interfaces';
 import { useAuth } from '@/contexts/AuthContext';
 import { db } from '@/lib/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
 export default function Home() {
   const { user, loading: authLoading } = useAuth();
@@ -48,9 +49,8 @@ export default function Home() {
         // Only set default data if no saved data exists
         setCvData(defaultCVData);
       }
-    } catch (error) {
-      console.error('Error loading CV data:', error);
-      console.log('No saved CV data found, using default');
+    } catch {
+      toast.error('Error loading CV data. Using default template.');
       setCvData(defaultCVData);
     } finally {
       setCvLoading(false);
@@ -67,10 +67,10 @@ export default function Home() {
       const data = dataToSave || cvData;
       if (data) {
         await setDoc(docRef, data);
-        console.log('CV saved successfully!');
+        toast.success('CV saved successfully!');
       }
-    } catch (error) {
-      console.error('Failed to save CV:', error);
+    } catch {
+      toast.error('Failed to save CV. Please try again.');
     } finally {
       setCvSaving(false);
     }

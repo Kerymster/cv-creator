@@ -1,4 +1,5 @@
 import { User } from 'firebase/auth';
+import { toast } from 'react-toastify';
 
 export const handleSave = async (
   user: User | null,
@@ -18,7 +19,7 @@ export const handleSave = async (
     setSaveStatus('success');
     setTimeout(() => setSaveStatus('idle'), 3000);
   } catch (error) {
-    console.error('Save failed:', error);
+    toast.error(`Save failed. Please try again.${error}`);
     setSaveStatus('error');
     setTimeout(() => setSaveStatus('idle'), 3000);
   } finally {

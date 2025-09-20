@@ -7,6 +7,7 @@ import HeaderSection from '@/sections/header-section';
 import EditButton from '@/components/edit-button/EditButton';
 import ConfirmationDialog from '@/components/dialog/ConfirmationDialog';
 import HeaderEditForm from '@/components/forms/HeaderEditForm';
+import { toast } from 'react-toastify';
 
 interface HeaderWithEditProps {
   currentTheme: ThemeColors;
@@ -46,8 +47,8 @@ const HeaderWithEdit: React.FC<HeaderWithEditProps> = ({
       }
 
       setIsEditDialogOpen(false);
-    } catch (error) {
-      console.error('Failed to save changes:', error);
+    } catch {
+      toast.error('Failed to save changes. Please try again.');
     } finally {
       setIsEditing(false);
     }

@@ -1,4 +1,5 @@
 import { CVData } from '@/types/cvTypes/interfaces';
+import { toast } from 'react-toastify';
 
 export interface ImageUploadHandlerProps {
   event: React.ChangeEvent<HTMLInputElement>;
@@ -17,7 +18,7 @@ export const handleImageUpload = ({
   if (file) {
     // Check file type
     if (!file.type.startsWith('image/')) {
-      alert('Please select an image file');
+      toast.error('Please select an image file');
       // Reset file input
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
@@ -27,7 +28,7 @@ export const handleImageUpload = ({
 
     // Check file size (max 5MB)
     if (file.size > 5 * 1024 * 1024) {
-      alert('Image size should be less than 5MB');
+      toast.error('Image size should be less than 5MB');
       // Reset file input
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
@@ -46,6 +47,7 @@ export const handleImageUpload = ({
         },
       };
       updateCVData(updatedCVData);
+      toast.success('Photo uploaded successfully!');
       // Reset file input after successful upload
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
