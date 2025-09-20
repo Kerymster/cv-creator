@@ -1,8 +1,8 @@
-import { ThemeColors } from "@/types/appTypes";
-import { CVData } from "@/types/cvTypes/interfaces";
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getSkillIcon, getSkillIconColor } from "@/utils/skillsIcons";
+import { ThemeColors } from '@/types/appTypes';
+import { CVData } from '@/types/cvTypes/interfaces';
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getSkillIcon, getSkillIconColor } from '@/utils/skillsIcons';
 
 interface TechnicalSkillsProps {
   currentTheme: ThemeColors;
@@ -22,11 +22,11 @@ const SkillBadge = ({
 
   return (
     <span
-      className={`px-3 py-2 ${currentTheme.card} rounded-lg text-sm ${currentTheme.text} ${currentTheme.bodyFont} flex items-center gap-2 border ${currentTheme.border} hover:shadow-sm transition-shadow`}
+      className={`px-3 py-2 ${currentTheme.card} rounded-lg text-sm ${currentTheme.text} ${currentTheme.bodyFont} flex items-center gap-2 border ${currentTheme.border} transition-shadow hover:shadow-sm`}
     >
       <FontAwesomeIcon
         icon={icon}
-        className="w-4 h-4"
+        className="h-4 w-4"
         style={{ color: iconColor }}
       />
       {skill}
@@ -42,7 +42,7 @@ const TechnicalSkills = ({ currentTheme, cvData }: TechnicalSkillsProps) => {
       >
         Technical Skills
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="flex flex-wrap gap-6">
         <div>
           <h3
             className={`${currentTheme.headingFont} font-semibold ${currentTheme.accent} mb-3`}
@@ -67,22 +67,6 @@ const TechnicalSkills = ({ currentTheme, cvData }: TechnicalSkillsProps) => {
           </h3>
           <div className="flex flex-wrap gap-2">
             {cvData.skills.technical.slice(4, 8).map((skill, index) => (
-              <SkillBadge
-                key={index}
-                skill={skill}
-                currentTheme={currentTheme}
-              />
-            ))}
-          </div>
-        </div>
-        <div>
-          <h3
-            className={`${currentTheme.headingFont} font-semibold ${currentTheme.accent} mb-3`}
-          >
-            Languages
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {cvData.skills.languages.map((skill, index) => (
               <SkillBadge
                 key={index}
                 skill={skill}

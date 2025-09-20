@@ -18,6 +18,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { db } from '@/lib/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
+import Languages from '@/sections/languages';
 
 export default function Home() {
   const { user, loading: authLoading } = useAuth();
@@ -139,6 +140,9 @@ export default function Home() {
 
               {/* Technical Skills */}
               <TechnicalSkills currentTheme={currentTheme} cvData={cvData!} />
+
+              {/* Languages */}
+              <Languages currentTheme={currentTheme} cvData={cvData!} />
 
               {/* Professional Experience */}
               <ProfessionalExperience
