@@ -5,7 +5,7 @@ import ControlPanel from '@/components/panel';
 import { themes } from '@/constants/themes';
 import Certifications from '@/sections/certifications';
 import Education from '@/sections/education';
-import HeaderSection from '@/sections/header-section';
+import HeaderWithEdit from '@/components/header/HeaderWithEdit';
 import ProfessionalExperience from '@/sections/professional-experience';
 import Projects from '@/sections/projects';
 import Summary from '@/sections/summary';
@@ -20,8 +20,9 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export default function Home() {
   const { user, loading: authLoading } = useAuth();
-  const [cvData, setCvData] = useState<CVData>(defaultCVData);
+  const [cvData, setCvData] = useState<CVData | null>(null);
   const [cvSaving, setCvSaving] = useState(false);
+  const [cvLoading, setCvLoading] = useState(true); // Start with loading true
   const [theme, setTheme] = useState<Theme>('slateAmber');
   const [headingFont, setHeadingFont] = useState<Font>('poppins');
   const [bodyFont, setBodyFont] = useState<Font>('inter');
@@ -37,27 +38,37 @@ export default function Home() {
     if (!user) return;
 
     try {
+      setCvLoading(true);
       const docRef = doc(db, 'cvData', user.uid);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
         setCvData(docSnap.data() as CVData);
+      } else {
+        // Only set default data if no saved data exists
+        setCvData(defaultCVData);
       }
     } catch (error) {
       console.error('Error loading CV data:', error);
       console.log('No saved CV data found, using default');
+      setCvData(defaultCVData);
+    } finally {
+      setCvLoading(false);
     }
   }, [user]);
 
   // Simple function to save CV data
-  const saveCVData = async () => {
+  const saveCVData = async (dataToSave?: CVData) => {
     if (!user) return;
 
     try {
       setCvSaving(true);
       const docRef = doc(db, 'cvData', user.uid);
-      await setDoc(docRef, cvData);
-      console.log('CV saved successfully!');
+      const data = dataToSave || cvData;
+      if (data) {
+        await setDoc(docRef, data);
+        console.log('CV saved successfully!');
+      }
     } catch (error) {
       console.error('Failed to save CV:', error);
     } finally {
@@ -67,7 +78,10 @@ export default function Home() {
 
   // Simple function to update CV data
   const updateCVData = (updates: Partial<CVData>) => {
-    setCvData((prev) => ({ ...prev, ...updates }));
+    setCvData((prev) => {
+      if (!prev) return null;
+      return { ...prev, ...updates };
+    });
   };
 
   // Load data when user changes
@@ -76,16 +90,19 @@ export default function Home() {
       loadCVData();
     } else {
       setCvData(defaultCVData);
+      setCvLoading(false);
     }
   }, [user, loadCVData]);
 
-  // Show loading only during initial auth check
-  if (authLoading) {
+  // Show loading during auth check or CV data loading (only when user is logged in)
+  if (authLoading || (user && cvLoading) || (user && !cvData)) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-50">
         <div className="text-center">
           <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-blue-600"></div>
-          <p className="text-gray-600">Loading...</p>
+          <p className="text-gray-600">
+            {authLoading ? 'Loading...' : 'Loading your CV...'}
+          </p>
         </div>
       </div>
     );
@@ -105,28 +122,33 @@ export default function Home() {
               className={`${currentTheme.card} rounded-lg p-8 shadow-lg ${currentTheme.border} border`}
             >
               {/* Header Section */}
-              <HeaderSection currentTheme={currentTheme} cvData={cvData} />
+              <HeaderWithEdit
+                currentTheme={currentTheme}
+                cvData={cvData!}
+                onDataUpdate={updateCVData}
+                onSave={saveCVData}
+              />
 
               {/* Professional Summary */}
-              <Summary currentTheme={currentTheme} cvData={cvData} />
+              <Summary currentTheme={currentTheme} cvData={cvData!} />
 
               {/* Technical Skills */}
-              <TechnicalSkills currentTheme={currentTheme} cvData={cvData} />
+              <TechnicalSkills currentTheme={currentTheme} cvData={cvData!} />
 
               {/* Professional Experience */}
               <ProfessionalExperience
                 currentTheme={currentTheme}
-                cvData={cvData}
+                cvData={cvData!}
               />
 
               {/* Education */}
-              <Education currentTheme={currentTheme} cvData={cvData} />
+              <Education currentTheme={currentTheme} cvData={cvData!} />
 
               {/* Projects */}
-              <Projects currentTheme={currentTheme} cvData={cvData} />
+              <Projects currentTheme={currentTheme} cvData={cvData!} />
 
               {/* Certifications */}
-              <Certifications currentTheme={currentTheme} cvData={cvData} />
+              <Certifications currentTheme={currentTheme} cvData={cvData!} />
             </div>
           </div>
 
@@ -138,7 +160,7 @@ export default function Home() {
               bodyFont={bodyFont}
               setHeadingFont={setHeadingFont}
               setBodyFont={setBodyFont}
-              cvData={cvData}
+              cvData={cvData!}
               updateCVData={updateCVData}
               onSave={saveCVData}
               cvSaving={cvSaving}

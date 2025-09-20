@@ -57,21 +57,30 @@ const ContentSection = ({ currentTheme, cvData }: ContentSectionProps) => {
       <div
         className={`flex flex-wrap justify-start gap-4 text-sm ${currentTheme.bodyFont}`}
       >
-        <span className={`${currentTheme.text} flex items-center gap-2`}>
-          <FontAwesomeIcon
-            icon={faLinkedin}
-            className="h-4 w-4 text-gray-500"
-          />
-          {cvData.personalInfo.linkedin}
-        </span>
-        <span className={`${currentTheme.text} flex items-center gap-2`}>
-          <FontAwesomeIcon icon={faGithub} className="h-4 w-4 text-gray-500" />
-          {cvData.personalInfo.github}
-        </span>
-        <span className={`${currentTheme.text} flex items-center gap-2`}>
-          <FontAwesomeIcon icon={faGlobe} className="h-4 w-4 text-gray-500" />
-          {cvData.personalInfo.website}
-        </span>
+        {cvData.personalInfo.linkedin && (
+          <span className={`${currentTheme.text} flex items-center gap-2`}>
+            <FontAwesomeIcon
+              icon={faLinkedin}
+              className="h-4 w-4 text-gray-500"
+            />
+            {cvData.personalInfo.linkedin}
+          </span>
+        )}
+        {cvData.personalInfo.github && (
+          <span className={`${currentTheme.text} flex items-center gap-2`}>
+            <FontAwesomeIcon
+              icon={faGithub}
+              className="h-4 w-4 text-gray-500"
+            />
+            {cvData.personalInfo.github}
+          </span>
+        )}
+        {cvData.personalInfo.website && (
+          <span className={`${currentTheme.text} flex items-center gap-2`}>
+            <FontAwesomeIcon icon={faGlobe} className="h-4 w-4 text-gray-500" />
+            {cvData.personalInfo.website}
+          </span>
+        )}
       </div>
     </div>
   );
