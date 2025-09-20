@@ -8,7 +8,7 @@ import Education from '@/sections/education';
 import HeaderWithEdit from '@/components/header/HeaderWithEdit';
 import ProfessionalExperience from '@/sections/professional-experience';
 import Projects from '@/sections/projects';
-import Summary from '@/sections/summary';
+import SummaryWithEdit from '@/components/summary/SummaryWithEdit';
 import TechnicalSkills from '@/sections/technical-skills';
 import { Theme, Font } from '@/types/appTypes';
 import { useState, useEffect, useCallback } from 'react';
@@ -130,7 +130,12 @@ export default function Home() {
               />
 
               {/* Professional Summary */}
-              <Summary currentTheme={currentTheme} cvData={cvData!} />
+              <SummaryWithEdit
+                currentTheme={currentTheme}
+                cvData={cvData!}
+                onDataUpdate={updateCVData}
+                onSave={saveCVData}
+              />
 
               {/* Technical Skills */}
               <TechnicalSkills currentTheme={currentTheme} cvData={cvData!} />
