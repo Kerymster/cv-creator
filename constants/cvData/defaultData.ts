@@ -15,11 +15,8 @@ export const defaultCVData: CVData = {
   summary:
     'Experienced Software Engineer with 5+ years of expertise in full-stack development, cloud architecture, and team leadership. Passionate about building scalable applications and mentoring junior developers. Proven track record of delivering high-quality software solutions that drive business growth.',
   skills: {
-    technical: [
-      'JavaScript',
-      'TypeScript',
-      'Python',
-      'Java',
+    programmingLanguages: ['JavaScript', 'TypeScript', 'Python', 'Java'],
+    frameworks: [
       'React',
       'Node.js',
       'Express',

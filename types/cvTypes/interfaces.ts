@@ -21,9 +21,11 @@ export interface personalInfo {
 }
 
 export interface skills {
-  technical: string[];
+  programmingLanguages: string[];
+  frameworks: string[];
   languages: string[];
   tools: string[];
+  technical?: string[]; // Legacy support for old data structure
 }
 
 export interface experience {

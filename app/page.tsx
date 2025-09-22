@@ -9,7 +9,7 @@ import HeaderWithEdit from '@/components/header/HeaderWithEdit';
 import ProfessionalExperience from '@/sections/professional-experience';
 import Projects from '@/sections/projects';
 import SummaryWithEdit from '@/components/summary/SummaryWithEdit';
-import TechnicalSkills from '@/sections/technical-skills';
+import TechnicalSkillsWithEdit from '@/sections/technical-skills/TechnicalSkillsWithEdit';
 import { Theme, Font } from '@/types/appTypes';
 import { useState, useEffect, useCallback } from 'react';
 import { defaultCVData } from '@/constants/cvData/defaultData';
@@ -18,6 +18,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { db } from '@/lib/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
+import Languages from '@/sections/languages';
 
 export default function Home() {
   const { user, loading: authLoading } = useAuth();
@@ -138,7 +139,15 @@ export default function Home() {
               />
 
               {/* Technical Skills */}
-              <TechnicalSkills currentTheme={currentTheme} cvData={cvData!} />
+              <TechnicalSkillsWithEdit
+                currentTheme={currentTheme}
+                cvData={cvData!}
+                onDataUpdate={updateCVData}
+                onSave={saveCVData}
+              />
+
+              {/* Languages */}
+              <Languages currentTheme={currentTheme} cvData={cvData!} />
 
               {/* Professional Experience */}
               <ProfessionalExperience
