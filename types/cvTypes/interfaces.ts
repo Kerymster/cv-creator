@@ -20,10 +20,21 @@ export interface personalInfo {
   photo?: string; // Base64 encoded image or URL
 }
 
+export interface LanguageWithProficiency {
+  name: string;
+  proficiency:
+    | 'Native'
+    | 'Fluent'
+    | 'Advanced'
+    | 'Intermediate'
+    | 'Basic'
+    | 'Conversational';
+}
+
 export interface skills {
   programmingLanguages: string[];
   frameworks: string[];
-  languages: string[];
+  languages: LanguageWithProficiency[];
   tools: string[];
   technical?: string[]; // Legacy support for old data structure
 }
