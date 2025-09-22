@@ -2,21 +2,21 @@
 
 import React, { useState } from 'react';
 import { ThemeColors } from '@/types/appTypes';
-import { CVData, personalInfo } from '@/types/cvTypes/interfaces';
-import HeaderSection from '@/sections/header-section';
+import { CVData } from '@/types/cvTypes/interfaces';
+import TechnicalSkills from './index';
 import EditButton from '@/components/edit-button/EditButton';
 import ConfirmationDialog from '@/components/dialog/ConfirmationDialog';
-import HeaderEditForm from '@/components/forms/HeaderEditForm';
+import TechnicalSkillsEditForm from '@/components/forms/TechnicalSkillsEditForm';
 import { toast } from 'react-toastify';
 
-interface HeaderWithEditProps {
+interface TechnicalSkillsWithEditProps {
   currentTheme: ThemeColors;
   cvData: CVData;
   onDataUpdate?: (updatedData: CVData) => void;
   onSave?: (dataToSave: CVData) => Promise<void>;
 }
 
-const HeaderWithEdit: React.FC<HeaderWithEditProps> = ({
+const TechnicalSkillsWithEdit: React.FC<TechnicalSkillsWithEditProps> = ({
   currentTheme,
   cvData,
   onDataUpdate,
@@ -29,13 +29,20 @@ const HeaderWithEdit: React.FC<HeaderWithEditProps> = ({
     setIsEditDialogOpen(true);
   };
 
-  const handleSave = async (updatedPersonalInfo: personalInfo) => {
+  const handleSave = async (
+    updatedProgrammingLanguages: string[],
+    updatedFrameworks: string[]
+  ) => {
     setIsEditing(true);
 
     try {
       const updatedCVData: CVData = {
         ...cvData,
-        personalInfo: updatedPersonalInfo,
+        skills: {
+          ...cvData.skills,
+          programmingLanguages: updatedProgrammingLanguages,
+          frameworks: updatedFrameworks,
+        },
       };
 
       if (onDataUpdate) {
@@ -65,18 +72,18 @@ const HeaderWithEdit: React.FC<HeaderWithEditProps> = ({
           onClick={handleEditClick}
           size="sm"
           variant="gradient"
-          title="Edit header information"
+          title="Edit technical skills"
         />
       </div>
 
-      {/* Header Section */}
-      <HeaderSection currentTheme={currentTheme} cvData={cvData} />
+      {/* Technical Skills Section */}
+      <TechnicalSkills currentTheme={currentTheme} cvData={cvData} />
 
       {/* Edit Dialog */}
       <ConfirmationDialog
         isOpen={isEditDialogOpen}
         onClose={handleCancel}
-        title="Edit Header Information"
+        title="Edit Technical Skills"
         hasConfirmButton={false}
         hasCloseButton={true}
         maxWidth="800px"
@@ -84,8 +91,21 @@ const HeaderWithEdit: React.FC<HeaderWithEditProps> = ({
         closeOnEscape={true}
         contentPadding="24px"
       >
-        <HeaderEditForm
-          initialData={cvData.personalInfo}
+        <TechnicalSkillsEditForm
+          initialProgrammingLanguages={
+            cvData.skills.programmingLanguages ||
+            (
+              cvData.skills as CVData['skills'] & { technical?: string[] }
+            ).technical?.slice(0, 4) ||
+            []
+          }
+          initialFrameworks={
+            cvData.skills.frameworks ||
+            (
+              cvData.skills as CVData['skills'] & { technical?: string[] }
+            ).technical?.slice(4, 8) ||
+            []
+          }
           onSave={handleSave}
           onCancel={handleCancel}
           isSaving={isEditing}
@@ -95,4 +115,4 @@ const HeaderWithEdit: React.FC<HeaderWithEditProps> = ({
   );
 };
 
-export default HeaderWithEdit;
+export default TechnicalSkillsWithEdit;

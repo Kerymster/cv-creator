@@ -45,87 +45,78 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
-// Skills icon mapping
 export const skillsIconMap: Record<string, IconDefinition> = {
-  // Programming Languages
   JavaScript: faJs,
   JS: faJs,
-  TypeScript: faJs, // Using JS icon for TypeScript
+  TypeScript: faJs,
   TS: faJs,
   Python: faPython,
   Java: faJava,
   PHP: faPhp,
-  Rust: faCode, // Fallback icon
-  Go: faCode, // Fallback icon
-  Swift: faCode, // Fallback icon
-  Kotlin: faCode, // Fallback icon
-  'C#': faCode, // Fallback icon
-  CSharp: faCode, // Fallback icon
-  R: faCode, // Fallback icon
-  Ruby: faCode, // Fallback icon
+  Rust: faCode,
+  Go: faCode,
+  Swift: faCode,
+  Kotlin: faCode,
+  'C#': faCode,
+  CSharp: faCode,
+  R: faCode,
+  Ruby: faCode,
 
-  // Frontend Frameworks & Libraries
   React: faReact,
   Vue: faVuejs,
   'Vue.js': faVuejs,
   Angular: faAngular,
   'Node.js': faNodeJs,
   Node: faNodeJs,
-  Express: faNodeJs, // Using Node.js icon for Express
-  'Next.js': faReact, // Using React icon for Next.js
-  Nuxt: faVuejs, // Using Vue icon for Nuxt
+  Express: faNodeJs,
+  'Next.js': faReact,
+  Nuxt: faVuejs,
 
-  // Backend Frameworks
-  Django: faPython, // Using Python icon for Django
-  Flask: faPython, // Using Python icon for Flask
+  Django: faPython,
+  Flask: faPython,
   Laravel: faLaravel,
-  Spring: faJava, // Using Java icon for Spring
-  FastAPI: faPython, // Using Python icon for FastAPI
+  Spring: faJava,
+  FastAPI: faPython,
 
-  // Databases
-  PostgreSQL: faDatabase, // Fallback icon
-  Postgres: faDatabase, // Fallback icon
-  MongoDB: faDatabase, // Fallback icon
-  MySQL: faDatabase, // Fallback icon
-  Redis: faDatabase, // Fallback icon
-  Elasticsearch: faDatabase, // Fallback icon
-  SQLite: faDatabase, // Fallback icon
+  PostgreSQL: faDatabase,
+  Postgres: faDatabase,
+  MongoDB: faDatabase,
+  MySQL: faDatabase,
+  Redis: faDatabase,
+  Elasticsearch: faDatabase,
+  SQLite: faDatabase,
 
-  // Cloud & DevOps
   AWS: faAws,
   Docker: faDocker,
-  Kubernetes: faCode, // Fallback icon
-  K8s: faCode, // Fallback icon
-  Jenkins: faCode, // Fallback icon
-  Terraform: faCode, // Fallback icon
-  Ansible: faCode, // Fallback icon
-  Nginx: faCode, // Fallback icon
-  Apache: faCode, // Fallback icon
-  Heroku: faCode, // Fallback icon
-  Vercel: faCode, // Fallback icon
-  Netlify: faCode, // Fallback icon
-  Firebase: faCode, // Fallback icon
-  Supabase: faCode, // Fallback icon
-  DigitalOcean: faCode, // Fallback icon
-  'Google Cloud': faCode, // Fallback icon
-  GCP: faCode, // Fallback icon
+  Kubernetes: faCode,
+  K8s: faCode,
+  Jenkins: faCode,
+  Terraform: faCode,
+  Ansible: faCode,
+  Nginx: faCode,
+  Apache: faCode,
+  Heroku: faCode,
+  Vercel: faCode,
+  Netlify: faCode,
+  Firebase: faCode,
+  Supabase: faCode,
+  DigitalOcean: faCode,
+  'Google Cloud': faCode,
+  GCP: faCode,
   Azure: faMicrosoft,
   Microsoft: faMicrosoft,
 
-  // Version Control & Tools
   Git: faGit,
   GitHub: faGithub,
-  GitLab: faGit, // Using Git icon for GitLab
-  Bitbucket: faGit, // Using Git icon for Bitbucket
+  GitLab: faGit,
+  Bitbucket: faGit,
 
-  // Design & UI/UX
   Figma: faFigma,
-  Adobe: faPalette, // Fallback icon
-  Photoshop: faPalette, // Fallback icon
-  Illustrator: faPalette, // Fallback icon
-  Sketch: faPalette, // Fallback icon
+  Adobe: faPalette,
+  Photoshop: faPalette,
+  Illustrator: faPalette,
+  Sketch: faPalette,
 
-  // Web Technologies
   HTML: faHtml5,
   HTML5: faHtml5,
   CSS: faCss3Alt,
@@ -133,35 +124,32 @@ export const skillsIconMap: Record<string, IconDefinition> = {
   Sass: faSass,
   SCSS: faSass,
   Bootstrap: faBootstrap,
-  Tailwind: faCss3Alt, // Using CSS icon for Tailwind
-  'Material-UI': faReact, // Using React icon for Material-UI
-  Chakra: faReact, // Using React icon for Chakra UI
+  Tailwind: faCss3Alt,
+  'Material-UI': faReact,
+  Chakra: faReact,
 
-  // Operating Systems
   Linux: faLinux,
   Ubuntu: faUbuntu,
   Windows: faWindows,
   macOS: faApple,
   Mac: faApple,
-  iOS: faApple, // Using Apple icon for iOS
+  iOS: faApple,
   Android: faAndroid,
 
-  // Project Management & Communication
   Jira: faJira,
   Confluence: faConfluence,
   Trello: faTrello,
-  Asana: faCode, // Fallback icon
+  Asana: faCode,
   Notion: faNotion,
   Slack: faSlack,
   Discord: faDiscord,
   Telegram: faTelegram,
   WhatsApp: faWhatsapp,
   Skype: faSkype,
-  Zoom: faCode, // Fallback icon
+  Zoom: faCode,
   Teams: faMicrosoft,
   'Microsoft Teams': faMicrosoft,
 
-  // Languages (Human Languages)
   English: faLanguage,
   Spanish: faLanguage,
   French: faLanguage,
@@ -176,20 +164,16 @@ export const skillsIconMap: Record<string, IconDefinition> = {
   Hindi: faLanguage,
 };
 
-// Function to get icon for a skill
 export const getSkillIcon = (skillName: string) => {
-  // Try exact match first
   if (skillsIconMap[skillName]) {
     return skillsIconMap[skillName];
   }
 
-  // Extract base language name (remove parentheses content)
   const baseLanguage = skillName.split(' (')[0].trim();
   if (skillsIconMap[baseLanguage]) {
     return skillsIconMap[baseLanguage];
   }
 
-  // Try case-insensitive match
   const lowerSkill = skillName.toLowerCase();
   for (const [key, icon] of Object.entries(skillsIconMap)) {
     if (key.toLowerCase() === lowerSkill) {
@@ -197,7 +181,6 @@ export const getSkillIcon = (skillName: string) => {
     }
   }
 
-  // Try case-insensitive match with base language
   const lowerBaseLanguage = baseLanguage.toLowerCase();
   for (const [key, icon] of Object.entries(skillsIconMap)) {
     if (key.toLowerCase() === lowerBaseLanguage) {
@@ -205,7 +188,6 @@ export const getSkillIcon = (skillName: string) => {
     }
   }
 
-  // Try partial match for common patterns
   if (lowerSkill.includes('javascript') || lowerSkill.includes('js')) {
     return faJs;
   }
@@ -256,46 +238,42 @@ export const getSkillIcon = (skillName: string) => {
     return faGlobe;
   }
 
-  // Default fallback icon
   return faCode;
 };
 
-// Function to get icon color for a skill (optional enhancement)
 export const getSkillIconColor = (skillName: string): string => {
   const lowerSkill = skillName.toLowerCase();
 
-  // Brand colors for popular technologies
   if (lowerSkill.includes('javascript') || lowerSkill.includes('js')) {
-    return '#F7DF1E'; // JavaScript yellow
+    return '#F7DF1E';
   }
   if (lowerSkill.includes('react')) {
-    return '#61DAFB'; // React blue
+    return '#61DAFB';
   }
   if (lowerSkill.includes('node') || lowerSkill.includes('nodejs')) {
-    return '#339933'; // Node.js green
+    return '#339933';
   }
   if (lowerSkill.includes('python')) {
-    return '#3776AB'; // Python blue
+    return '#3776AB';
   }
   if (lowerSkill.includes('java')) {
-    return '#ED8B00'; // Java orange
+    return '#ED8B00';
   }
   if (lowerSkill.includes('docker')) {
-    return '#2496ED'; // Docker blue
+    return '#2496ED';
   }
   if (lowerSkill.includes('aws')) {
-    return '#FF9900'; // AWS orange
+    return '#FF9900';
   }
   if (lowerSkill.includes('git')) {
-    return '#F05032'; // Git red
+    return '#F05032';
   }
   if (lowerSkill.includes('mongodb')) {
-    return '#47A248'; // MongoDB green
+    return '#47A248';
   }
   if (lowerSkill.includes('postgresql') || lowerSkill.includes('postgres')) {
-    return '#336791'; // PostgreSQL blue
+    return '#336791';
   }
 
-  // Default color
-  return '#6B7280'; // Gray-500
+  return '#6B7280';
 };

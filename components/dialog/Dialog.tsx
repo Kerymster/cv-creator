@@ -54,7 +54,7 @@ const Dialog: React.FC<DialogProps> = ({
       className="fixed inset-0 z-50 flex cursor-pointer items-center justify-center bg-gray-500/70"
       onClick={handleBackdropClick}
     >
-      <div className="relative max-h-[90vh] w-full max-w-md overflow-hidden">
+      <div className="relative max-h-[90vh] w-full max-w-3xl overflow-hidden">
         {children}
       </div>
     </div>,

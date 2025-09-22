@@ -35,22 +35,23 @@ const SkillBadge = ({
 };
 
 const TechnicalSkills = ({ currentTheme, cvData }: TechnicalSkillsProps) => {
+  const { programmingLanguages, frameworks } = cvData.skills;
+  const { headingFont, accent, text, border } = currentTheme;
+
   return (
     <section className="mb-8">
       <h2
-        className={`text-2xl ${currentTheme.headingFont} font-bold ${currentTheme.text} mb-4 border-b ${currentTheme.border} pb-2`}
+        className={`text-2xl ${headingFont} font-bold ${text} mb-4 border-b ${border} pb-2`}
       >
         Technical Skills
       </h2>
       <div className="flex flex-wrap gap-6">
         <div>
-          <h3
-            className={`${currentTheme.headingFont} font-semibold ${currentTheme.accent} mb-3`}
-          >
+          <h3 className={`${headingFont} font-semibold ${accent} mb-3`}>
             Programming Languages
           </h3>
           <div className="flex flex-wrap gap-2">
-            {cvData.skills.technical.slice(0, 4).map((skill, index) => (
+            {programmingLanguages.map((skill, index) => (
               <SkillBadge
                 key={index}
                 skill={skill}
@@ -60,13 +61,11 @@ const TechnicalSkills = ({ currentTheme, cvData }: TechnicalSkillsProps) => {
           </div>
         </div>
         <div>
-          <h3
-            className={`${currentTheme.headingFont} font-semibold ${currentTheme.accent} mb-3`}
-          >
+          <h3 className={`${headingFont} font-semibold ${accent} mb-3`}>
             Frameworks & Tools
           </h3>
           <div className="flex flex-wrap gap-2">
-            {cvData.skills.technical.slice(4, 8).map((skill, index) => (
+            {frameworks.map((skill, index) => (
               <SkillBadge
                 key={index}
                 skill={skill}
