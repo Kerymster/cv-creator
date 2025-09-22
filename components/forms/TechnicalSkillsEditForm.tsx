@@ -159,7 +159,7 @@ const TechnicalSkillsEditForm: React.FC<TechnicalSkillsEditFormProps> = ({
                   <button
                     type="button"
                     onClick={() => handleRemoveProgrammingLanguage(index)}
-                    className="flex items-center justify-center rounded-lg bg-red-100 p-2 text-red-600 transition-colors hover:bg-red-200 focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    className="flex cursor-pointer items-center justify-center rounded-lg bg-red-100 p-2 text-red-600 transition-colors hover:bg-red-200 focus:ring-2 focus:ring-red-500 focus:outline-none"
                     title="Remove language"
                   >
                     <FontAwesomeIcon icon={faTrash} className="h-4 w-4" />
@@ -229,7 +229,7 @@ const TechnicalSkillsEditForm: React.FC<TechnicalSkillsEditFormProps> = ({
                   <button
                     type="button"
                     onClick={() => handleRemoveFramework(index)}
-                    className="flex items-center justify-center rounded-lg bg-red-100 p-2 text-red-600 transition-colors hover:bg-red-200 focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    className="flex cursor-pointer items-center justify-center rounded-lg bg-red-100 p-2 text-red-600 transition-colors hover:bg-red-200 focus:ring-2 focus:ring-red-500 focus:outline-none"
                     title="Remove framework"
                   >
                     <FontAwesomeIcon icon={faTrash} className="h-4 w-4" />

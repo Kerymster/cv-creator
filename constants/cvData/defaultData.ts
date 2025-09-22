@@ -25,9 +25,9 @@ export const defaultCVData: CVData = {
       'MongoDB',
     ],
     languages: [
-      'English (Native)',
-      'Spanish (Conversational)',
-      'French (Basic)',
+      { name: 'English', proficiency: 'Native' },
+      { name: 'Spanish', proficiency: 'Conversational' },
+      { name: 'French', proficiency: 'Basic' },
     ],
     tools: [
       'Git',
